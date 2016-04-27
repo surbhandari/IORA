@@ -1,0 +1,37 @@
+#!/usr/bin/python
+import psycopg2 as pq
+import re
+
+#cn = pq.connect('dbname=mydb user=postgres')
+conn = pq.connect("dbname='mydb' user='postgres' host='localhost' password='password'")
+print "Opened database successfully"
+cur = conn.cursor()
+cur.execute("select column_name from information_schema.columns where table_name='company';")
+col_name = cur.fetchall()
+
+#regex here
+#pattern = re.compile("[^a-zA-Z]")
+#for i in range(len(col_name)):
+#	col_name[i] = col_name[i].strip('(')
+	#col_name = col_name.strip(',')
+	#col_name = col_name.strip(')')
+	#col_name = col_name.strip('\'')
+print col_name
+collist=[]
+for item in col_name:
+	collist.append(item[0])
+print collist
+#print col_name[0]
+#re.sub('[^A-Za-z0-9\.]+', ' ', col_name[0])
+#words = re.findall(r"\'([A-Za-z]+)\'", col_name)
+#outputString = " ".join(words)
+#print outputString
+
+#print re.sub(r'[^a-zA-Z]+', '', col_name[0])
+
+
+conn.close()
+f = open('myfile.txt')
+first = f.readline().split("|")
+print first[0]
+

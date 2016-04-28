@@ -1,0 +1,10 @@
+CREATE OR REPLACE FUNCTION report_generate(acutaldate date ) RETURNS table (Analysis_By_Service_year double precision,Analysis_By_Service_Month double precision, dw_rawfilename varchar, count1 numeric) AS $$
+select extract(year from $1) as Analysis_By_Service_year,extract(month from $1) as Analysis_By_Service_Month,dw_rawfilename,sum(rev_paid_amt) as count1
+from stg_drw.file_rxclaims
+group by 1,2,3
+order by 1,2,3
+$$ LANGUAGE SQL;
+
+
+
+SELECT * from  report_generate('2016-01-16 12:21:13');

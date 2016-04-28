@@ -1,7 +1,0 @@
-id | name  | age |                      address                        |salary1     
-a b c 
-d
-f
-g
-t
-hsgfg
